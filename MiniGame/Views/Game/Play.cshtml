@@ -1,0 +1,215 @@
+﻿@{
+    ViewBag.Title = "Play";
+    Layout = "~/Views/Shared/LayoutViewGame.cshtml";
+}
+<style>
+    .pop-outer {
+        background-color: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .pop-inner {
+        background-color: #fff;
+        width: 30%;
+        height: auto;
+        padding: 25px;
+        margin: 5% auto;
+    }
+
+</style>
+<div id="question-container">
+    <div id="timeques">
+        <span id="compteur" style="font-size: 30px;color: aquamarine;background-color: cadetblue;border-radius: 10px;">15</span>
+    </div>
+    <div id="question">Question</div>
+    <p id="idQues" style="display:none"></p>
+    <div id="infoimg"><img id="imginfo" style="width:60%;height:60%"></img></div>
+    <div id="answer-buttons" class="" style="display:flex;margin:10px">
+        <div style="display: flex; flex-direction: column; width: 50%; margin: 2px 2px;">
+            <button class="btn btnda" id="btnA" onclick="Check(1,this.id)" style="height:50px;font-size:25px">Answer 1</button>
+            <button class="btn btnda" id="btnB" onclick="Check(2,this.id)" style="margin-top:10px;height:50px;font-size:25px">Answer 2</button>
+        </div>
+        <div style="display: flex; flex-direction: column; width: 50%; margin: 2px 2px;">
+            <button class="btn btnda" id="btnC" onclick="Check(3,this.id)" style="height:50px;font-size:25px">Answer 3</button>
+            <button class="btn btnda" id="btnD" onclick="Check(4,this.id)" style="margin-top:10px;height:50px;font-size:25px">Answer 4</button>
+        </div>
+
+    </div>
+</div>
+<div class="controls">
+    <button id="next-btn" class="next-btn btn" hidden="true" onclick="resetQues()">Tiếp theo</button>
+</div>
+<button class="open" style="display:none">Click to open popup</button>
+<audio autoplay>
+    <source src="~/Content/bcGHh21C01I_48.mp3" type="audio/mpeg">
+</audio>
+<script>
+    var tongdiem = 0;
+    var array = [];
+    $(document).ready(function () {
+        for (var i = 0; i < @ViewBag.count ; i++) {
+            array[i] = i;
+        }
+        createtime();
+        get();
+        $(".close").click(function () {
+            SaveRank();
+            $(".pop-outer").fadeOut("slow");
+            document.location = '@Url.Action("Rank","Game", new { id = ViewBag.Id })';
+        });
+    });
+    function resetQues() {
+        $("#btnA").css('background', '#2083ff');
+        $("#btnB").css('background', '#2083ff');
+        $("#btnC").css('background', '#2083ff');
+        $("#btnD").css('background', '#2083ff');
+        $("#btnA").css('border', '');
+        $("#btnB").css('border', '');
+        $("#btnC").css('border', '');
+        $("#btnD").css('border', '');
+        document.getElementById("btnA").disabled = false;
+        document.getElementById("btnB").disabled = false;
+        document.getElementById("btnC").disabled = false;
+        document.getElementById("btnD").disabled = false;
+        console.log(tongdiem);
+        var compteurElt = document.getElementById("compteur");
+        compteurElt.textContent = '15';
+        get();
+    }
+    function get() {
+        var number = Random();
+        console.log(number);
+        if (number >= 0) {
+            $.ajax({
+                url: '/Game/GetQuestion/',
+                dataType: "json",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                data: { id: '@ViewBag.Id', numeber: number },
+                success: function (data) {
+                    console.log(data);
+                    ChangeQues(data.Id, data.CauA, data.CauB, data.CauC, data.CauD, data.Mota, data.Hinhmota);
+                }
+            });
+        }
+        else {
+            $(".pop-outer").fadeIn("slow");
+            $("#diem").html(tongdiem + "/" + @ViewBag.count);
+        }
+    };
+    function SaveRank() {
+       $.ajax({
+           url: '/Game/CreateRank/',
+             dataType: "json",
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                data: { IdGoiCauHoi: '@ViewBag.Id', IdNguoiDung: '12', Diem: tongdiem },
+                success: function (data) {
+
+                }
+       });
+    };
+    function ChangeQues(id ,da1, da2, da3, da4, info, img) {
+
+        $("#btnA").html(da1);
+        $("#btnB").html(da2);
+        $("#btnC").html(da3);
+        $("#btnD").html(da4);
+        $("#question").html(info);
+        $("#idQues").html(id);
+        var src = '/Content/ImgCauHoi/'.concat(img);
+        console.log(src);
+        $('#imginfo').attr('src', src);
+    }
+    function Random() {
+        var item = random_item(array);
+        Delete(item);
+        return item;
+    }
+    function random_item(items) {
+        return items[Math.floor(Math.random() * items.length)];
+    }
+    function Delete(item) {
+        const index = array.indexOf(item);
+        if (index > -1) { // only splice array when item is found
+            array.splice(index, 1); // 2nd parameter means remove one item only
+        }
+    }
+    function Check(iddapan, idBtn) {
+        var idQues = $("#idQues").html();
+        $("#" + idBtn + "").css('border', 'solid 3px blue');
+        document.getElementById("btnA").disabled = true;
+        document.getElementById("btnB").disabled = true;
+        document.getElementById("btnC").disabled = true;
+        document.getElementById("btnD").disabled = true;
+        console.log(idBtn);
+        $.ajax({
+            url: '/Game/CheckQues/',
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            data: { id: idQues, iddapan: iddapan },
+            success: function (data) {
+                CheckQues(data.Dapan, idBtn, data.Dapandung);
+            }
+        });
+        $('#next-btn').removeAttr('hidden');
+    }
+    function CheckQues(dapan, idBtn, Dapandung) {
+
+        if (dapan == true) {
+            $(".btnda").css('background', '#916565');
+            $("#" + idBtn + "").css('background', '#d2d192');
+            tongdiem++;
+        }
+        else {
+            if (Dapandung == 1) {
+                $("#btnA").css('background', '#d2d192');
+                $("#btnB").css('background', '#916565');
+                $("#btnC").css('background', '#916565');
+                $("#btnD").css('background', '#916565');
+            }
+            if (Dapandung == 2) {
+                $("#btnA").css('background', '#916565');
+                $("#btnB").css('background', '#d2d192');
+                $("#btnC").css('background', '#916565');
+                $("#btnD").css('background', '#916565');
+            }
+            if (Dapandung == 3) {
+                $("#btnA").css('background', '#916565');
+                $("#btnB").css('background', '#916565');
+                $("#btnC").css('background', '#d2d192');
+                $("#btnD").css('background', '#916565');
+            }
+            if (Dapandung == 4) {
+                $("#btnA").css('background', '#916565');
+                $("#btnB").css('background', '#916565');
+                $("#btnC").css('background', '#916565');
+                $("#btnD").css('background', '#d2d192');
+            }
+        }
+    }
+    function createtime() {
+
+        var compteurElt = document.getElementById("compteur");
+
+        // Diminue le compteur jusqu'à 0
+        function diminuerCompteur() {
+            // Conversion en nombre du texte du compteur
+            var compteur = Number(compteurElt.textContent);
+            if (compteur > 1) {
+                compteurElt.textContent = compteur - 1;
+            } else {	// Modification du titre au bout de 2 secondes
+                resetQues();
+            }
+        }
+
+        // Appelle la fonction diminuerCompteur toutes les secondes (1000 millisecondes)
+        var intervalId = setInterval(diminuerCompteur, 1000);
+    }
+
+</script>

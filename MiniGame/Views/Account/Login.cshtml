@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/LayoutViewGame.cshtml";
+}
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="welcome-message">
+        <h1>Howdy! Welcome.</h1>
+        <input id="Ten" name="Ten" placeholder="Tài khoản" class="form-control" required></input>
+        <input id="Matkhau" name="Matkhau" type="password" placeholder="Mật khẩu" class="form-control" required></input>
+    </div>
+    if (ViewBag.sai == true)
+    {
+        <p style="text-align:center">Tài khoản hoặc mật khẩu sai.</p>
+    }
+
+<div class="controls" style="padding-top: 10px;">
+    <button style="color:white" id="1-btn" class="start-btn btn" type="submit">Đăng Nhập</button>
+    <p>Hoặc</p>
+    <a id="-btn" class="start-btn btn" href="/Account/Register">Đăng Ký</a>
+</div>
+
+}
+

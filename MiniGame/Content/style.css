@@ -1,0 +1,318 @@
+html {
+    scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd5d5;
+    background-image: url(https://cdnb.artstation.com/p/assets/images/images/026/540/413/large/vinayak-chetti-main-file.jpg?1589045389);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+input{
+  width: 70%;
+  background-color: white;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px 5px;
+}
+#timeques {
+	text-align: center;
+    font-weight: bold;
+	padding-bottom: 20px;
+}
+#imginfo {
+	border-radius: 25px;
+    border: 2px solid #73AD21;
+}
+body.correct {
+    background-color: rgb(167, 255, 207);
+}
+
+body.wrong {
+    background-color: rgb(255, 189, 189);
+}
+
+.container {
+    width: 800px;
+    max-width: 86%;
+    height: 90%;
+    border-radius: 5px;
+    padding: 10px;
+   
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.welcome-message {
+    text-align: center;
+}
+
+#question {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+	padding-bottom: 20px;
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.btn {
+
+    background-color: #2083ff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    border: none;
+}
+
+.btn:hover {
+    border-color: black;
+}
+
+.btn.correct {
+    color: rgb(1, 255, 115)
+}
+
+.btn.wrong {
+    color: rgb(255, 8, 0);
+}
+
+.btn,
+.start-btn,
+.next-btn {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+/* Start & Next Button Styling */
+.start-btn,
+.next-btn {
+    box-shadow: #2084ff50 0 10px 30px 5px !important;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	flex-direction: column;
+}
+
+
+.credit {
+    position: absolute;
+    right: 41%;
+    top: 85%;
+    display: block;
+}
+
+.credit p {
+    text-align: center;
+}
+
+#infoimg {
+	width: 100%;
+	height:auto;
+	justify-content:center;
+	display:flex;
+}
+/* Responsive & Media Queries */
+
+@media screen and (max-width:768px) {
+    .welcome-message p {
+        font-size: 18px;
+        margin: 20px 0;
+    }
+
+    #question-container {
+        width: 480px;
+    }
+
+    #question {
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        font-weight: 600;
+    }
+
+    .btn-grid {
+        margin-bottom: 30px;
+    }
+
+    .credit {
+        position: absolute;
+        right: 35%;
+        top: 85%;
+        display: block;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .welcome-message p {
+        font-size: 18px;
+        margin: 20px 0;
+    }
+
+    #question-container {
+        width: 710px;
+    }
+
+    #question {
+        font-size: 2.5rem;
+    }
+
+    .btn {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+        font-weight: 600;
+    }
+
+    .btn-grid {
+        margin-bottom: 30px;
+    }
+
+    .credit {
+        position: absolute;
+        right: 33%;
+        top: 85%;
+        display: block;
+    }
+}
+
+
+@media screen and (max-width: 767px) {
+    .container {
+        width: 90%;
+        height: 90%;
+    }
+
+    .welcome-message h1 {
+        font-size: 1rem;
+    }
+
+    .welcome-message p {
+        font-size: 15px;
+        margin: 20px 0;
+    }
+
+    .btn {
+        font-size: 15px;
+        padding: 10px 20px;
+    }
+
+    #question-container {
+        width: 300px;
+    }
+
+    #question {
+        font-size: 2rem;
+    }
+
+    .credit {
+        position: absolute;
+        right: 25%;
+        top: 82%;
+    }
+}
+
+
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 1024px) {
+    .welcome-message h1 {
+        font-size: 2rem;
+        margin: 20px 0;
+    }
+
+    .welcome-message p {
+        font-size: 1.2rem;
+        margin: 20px 0;
+    }
+
+    .credit {
+        right: 40%;
+    }
+}
+table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+table * {
+  position: relative;
+}
+table td, table th {
+  padding-left: 8px;
+}
+table thead tr {
+  height: 60px;
+  background: #86ffee;
+  font-size: 16px;
+}
+table tbody tr {
+  height: 48px;
+  border-bottom: 1px solid #E3F1D5;
+}
+table tbody tr:last-child {
+  border: 0;
+}
+table td, table th {
+  text-align: center;
+}
+    table td.l, table th.l {
+        text-align: center;
+    }
+table td.c, table th.c {
+  text-align: center;
+}
+table td.r, table th.r {
+  text-align: center;
+}
+
+
+
+blockquote {
+  color: white;
+  text-align: center;
+}

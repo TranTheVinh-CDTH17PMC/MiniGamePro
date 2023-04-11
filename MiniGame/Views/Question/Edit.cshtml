@@ -1,0 +1,61 @@
+﻿@model MiniGame.ViewModel.CauHoiViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/LayoutViewAdmin.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "Question", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="container-fluid">
+    <h1 class="h3 mb-2 text-gray-800">Chỉnh sửa câu hỏi</h1>
+    <div style=display:flex;padding:10px 0px;align-items: baseline;flex-direction: row;width: 100%;">
+
+        <div style="width:100%">
+            <span>Mô tả</span>
+            @Html.TextBoxFor(model => model.Mota, new { @class = "form-control", placeholder = "Mô tả...", style = "width:90%;padding-left:10px", @required = "required" })
+            <p style="padding: 5px;"></p>
+            <span>Câu 1</span>
+            @Html.TextBoxFor(model => model.CauA, new { @class = "form-control", placeholder = "Đáp án 1...", style = "width:90%;padding-left:10px", @required = "required")
+            <p style="padding: 5px;"></p>
+            <span>Câu 2</span>
+            @Html.TextBoxFor(model => model.CauB, new { @class = "form-control", placeholder = "Đáp án 2...", style = "width:90%;padding-left:10px", @required = "required" })
+            <p style="padding: 5px;"></p>
+            <span>Câu 3</span>
+            @Html.TextBoxFor(model => model.CauC, new { @class = "form-control", placeholder = "Đáp án 3...", style = "width:90%;padding-left:10px", @required = "required" })
+            <p style="padding: 5px;"></p>
+            <span>Câu 4</span>
+            @Html.TextBoxFor(model => model.CauD, new { @class = "form-control", placeholder = "Đáp án 4...", style = "width:90%;padding-left:10px", @required = "required" })
+            <p style="padding: 5px;"></p>
+        </div>
+        <div style="width:100%">
+            <span>Đáp án đúng</span>
+            <select class="form-control" aria-label="Chọn đáp án đúng" id="DAn" name="DAn" style="width:90%;padding-left:10px">
+                <option @(Model.DAn == null ? "selected" : "") value="" data-code="">-Chọn Đáp án đúng-</option>
+                <option @(Model.DAn == "1" ? "selected" : "") value="1">1</option>
+                <option @(Model.DAn == "2" ? "selected" : "") value="2">2</option>
+                <option @(Model.DAn == "3" ? "selected" : "") value="3">3</option>
+                <option @(Model.DAn == "4" ? "selected" : "") value="4">4</option>
+            </select>
+            <p style="padding: 5px;"></p>
+            <span>Loại câu hỏi</span>
+            <select class="form-control" aria-label="Chọn đáp án đúng" id="Id_Goicauhoi" name="Id_Goicauhoi" style="width:90%;padding-left:10px">
+                <option @(Model.Id_Goicauhoi == null ? "selected" : "") value="" data-code="">-Chọn Loại-</option>
+                @foreach (var item in ViewBag.listgch)
+                {
+                    <option @(Model.Id_Goicauhoi == item.Id ? "selected" : "") value="@item.Id">@item.Tengoi</option>
+                }
+            </select>
+            <p style="padding: 5px;"></p>
+            <span>Hình ảnh mô tả</span>
+            <img class="form-control" src="~/Content/ImgCauHoi/@Model.Hinhmota" style="width:48%;height:37%;"/>
+            <input id="File" name="File" type="file" class="form-control" placeholder="Hình ảnh" aria-label="Search" aria-describedby="basic-addon2" style="width:90%;padding-left:10px">
+            <p style="padding: 5px;"></p>
+        </div>
+    </div>
+    <button class="btn btn-primary">Cập nhật</button>
+    <!-- DataTales Example -->
+
+</div>
+}
+
+

@@ -1,0 +1,61 @@
+﻿@model MiniGame.ViewModel.CauHoiViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/LayoutViewAdmin.cshtml";
+}
+@using (Html.BeginForm("Create", "Question", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Thêm mới câu hỏi</h1>
+    <div style=display:flex;padding:10px 0px;align-items: baseline;flex-direction: row;width: 100%;">
+        <div style="width:100%">
+            <span>Mô tả</span>
+            @Html.TextBoxFor(model => model.Mota, new { @class = "form-control", placeholder = "Mô tả...", style = "width:90%;padding-left:10px", @required = "required" })
+            <p style="padding: 5px;"></p>
+            <span>Câu 1</span>
+            @Html.TextBoxFor(model => model.CauA, new { @class = "form-control", placeholder = "Đáp án 1...", style = "width:90%;padding-left:10px", @required = "required" })
+            <p style="padding: 5px;"></p>
+            <span>Câu 2</span>
+            @Html.TextBoxFor(model => model.CauB, new { @class = "form-control", placeholder = "Đáp án 2...", style = "width:90%;padding-left:10px", @required = "required" })
+            <p style="padding: 5px;"></p>
+            <span>Câu 3</span>
+            @Html.TextBoxFor(model => model.CauC, new { @class = "form-control", placeholder = "Đáp án 3...", style = "width:90%;padding-left:10px", @required = "required" })
+            <p style="padding: 5px;"></p>
+            <span>Câu 4</span>
+            @Html.TextBoxFor(model => model.CauD, new { @class = "form-control", placeholder = "Đáp án 4...", style = "width:90%;padding-left:10px", @required = "required" })
+            <p style="padding: 5px;"></p>
+        </div>
+        <div style="width:100%">
+            <span>Đáp án đúng</span>
+            <select class="form-control" aria-label="Chọn đáp án đúng" id="DAn" name="DAn" style="width:90%;padding-left:10px">
+                <option value="" data-code="">-Chọn loại-</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <p style="padding: 5px;"></p>
+            <span>Loại câu hỏi</span>
+            <select class="form-control" aria-label="Chọn đáp án đúng" id="Id_Goicauhoi" name="Id_Goicauhoi" style="width:90%;padding-left:10px">
+                <option value="" data-code="">-Chọn loại-</option>
+                @foreach (var item in ViewBag.listgch)
+                {
+                    <option value="@item.Id">@item.Tengoi</option>
+                }
+            </select>
+            <p style="padding: 5px;"></p>
+            <span>Hình ảnh mô tả</span>
+            <input id="File" name="File" type="file" class="form-control" placeholder="Hình ảnh" aria-label="Search" aria-describedby="basic-addon2" style="width:90%;padding-left:10px">
+            <p style="padding: 5px;"></p>
+        </div>
+
+
+    </div>
+    <button class="btn btn-primary">Tạo mới</button>
+    <!-- DataTales Example -->
+
+</div>
+}
+

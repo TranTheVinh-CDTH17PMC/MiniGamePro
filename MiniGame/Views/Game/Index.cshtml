@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutViewGame.cshtml";
+}
+
+<div id="question-container" class="hide">
+    <p>Xin chào @User.Identity.Name...</p>
+</div>
+<div class="controluser">
+    <a id="" class="start-btn btn" href="@Url.Action("Start", "Game")">Chơi game</a>
+    <a id="" class="start-btn btn" href="@Url.Action("Index", "Question")">Quản lí câu hỏi</a>
+    <a id="" class="start-btn btn" href="@Url.Action("Index", "QuestionPack")">Quản lí gói câu hỏi</a>
+</div>
+

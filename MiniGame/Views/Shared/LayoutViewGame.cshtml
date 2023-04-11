@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Responsive Quiz Web Application">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Al Nahian">
+    <meta name="url" content="https://alnahian.xyz">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Font API -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet Source -->
+    <link rel="stylesheet" href="~/Content/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Quiz App | Al Nahian</title>
+
+</head>
+
+<body style="background-image: url(https://cdnb.artstation.com/p/assets/images/images/026/540/413/large/vinayak-chetti-main-file.jpg?1589045389)">
+
+    <!-- Default unchecked -->
+    <div class="container">
+        <div class="centered">
+            @RenderBody()
+        </div>
+    </div>
+    <div style="display: none;" class="pop-outer">
+        <div class="pop-inner" style="text-align:center; border-radius:20px;display: flex;/*! position: revert; */justify-content: center;/*! position: ; */flex-direction: column;">
+            <h2>Hoàn thành bài kiểm tra</h2>
+            <p style="font-size:60px" id="diem">1/4</p>
+            <button class="close btn" style="background-color:#0ef45d;/*! text-align: center; */padding: 10px;">Hoàn tất</button>
+        </div>
+    </div>
+    <!-- Main JavaScript Source -->
+    <script src="~/Content/app.js"></script>
+    @* <script>
+            var compteurElt = document.getElementById("compteur");
+
+        // Diminue le compteur jusqu'à 0
+        function diminuerCompteur() {
+            // Conversion en nombre du texte du compteur
+            var compteur = Number(compteurElt.textContent);
+            if (compteur > 1) {
+                compteurElt.textContent = compteur - 1;
+            } else {
+                // Annule l'exécution répétée
+                clearInterval(intervalId);
+                // Modifie le titre de la page
+                var titre = document.getElementById("titre");
+                titre.textContent = "BOUM !!!";
+                // Modification du titre au bout de 2 secondes
+                setTimeout(function () {
+                    titre.textContent = "Tout est cassé :(";
+                }, 2000);
+            }
+        }
+
+        // Appelle la fonction diminuerCompteur toutes les secondes (1000 millisecondes)
+        var intervalId = setInterval(diminuerCompteur, 1000);
+        </script>*@
+</body>
+
+</html>
+

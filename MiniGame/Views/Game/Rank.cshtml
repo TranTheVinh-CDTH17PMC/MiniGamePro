@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Rank";
+    Layout = "~/Views/Shared/LayoutViewGame.cshtml";
+    var i = 1;
+}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        background: #fff;
+
+    }
+
+    th {
+        background-color: #326295;
+        font-weight: bold;
+        color: #fff;
+        white-space: nowrap;
+        border: 1px solid #b1154a;
+    }
+
+    td, th {
+        padding: 1em 1.5em;
+        text-align: left;
+        border: 1px solid #b1154a;
+    }
+
+    tbody th {
+        background-color: #2ea879;
+    }
+
+    tbody tr:nth-child(2n-1) {
+        background-color: #f5f5f5;
+        transition: all .125s ease-in-out;
+    }
+
+    tbody tr:hover {
+        background-color: rgba(50,98,149,.3);
+    }
+
+    td.rank {
+        text-transform: capitalize;
+    }
+</style>
+<div style="width:auto;text-align:center">
+    <h1>Bảng xếp hạng</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Xếp hạng</th>
+                <th>Tên Player</th>
+                <th>Tổng điểm</th>
+                <th></th>
+            </tr>
+        <thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>@i</td>
+                    <td>@item.TenNguoiDung</td>
+                    <td>@item.Diem</td>
+                    <td>
+                        @if (i == 1)
+                        {
+                            <img src="~/Content/first-place-gold-rosette-vector-260nw-234528031.jpg" alt="" width="70px" height="70px">
+                        }
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+    <a id="-btn" class="start-btn btn" href="/Game/Start">Chơi lại</a>
+</div>
+
+

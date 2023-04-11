@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutViewAdmin.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <form id="formaction" action="/QuestionPack/Create" method="post">
+       <div style="display:flex;padding:10px 0px">
+            <input id="Name" name="Name" type="text" class="form-control" placeholder="Tên gói câu hỏi..."
+                   aria-label="Search" aria-describedby="basic-addon2" style="width:40%;padding-left:10px" required>
+            <input id="Id" name="Id" hidden/>
+            <p style="padding: 10px;"></p>
+            <button class="btn btn-primary" type="submit" id="btnsumit">Tạo mới</button>
+        </div>
+    </form>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Danh sách gói câu hỏi</h6>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("Delete", "QuestionPack", FormMethod.Post))
+                {
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên gói</th>
+                                    <th>Mã gói</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên gói</th>
+                                    <th>Mã gói</th>
+                                    <th>Ngày tạo</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td><a href="@Url.Action("Details", "Question", new { @Id = item.Id })">@item.Id</a></td>
+                                    <td>@item.Tengoi</td>
+                                    <td>@item.IdTengoi</td>
+                                    <td>
+                                        <button class="btn btn-success" value="@item.Id" onclick="Chinhsua('@item.Tengoi',@item.Id)">Sửa</button>
+                                        <button class="btn btn-danger" id="Idelete" name="Idelete" value="@item.Id" type="submit">Xóa</button>
+                                    </td>
+                                </tr>
+                                }
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                </div>
+        </div>
+
+</div>
+    <script>
+        function Chinhsua(tengoi,id) {
+            debugger
+            $("#Name").val(tengoi);
+            $("#Id").val(id);
+            $('#btnsumit').text('Cập Nhật').button("refresh");
+            $("#formaction").attr('action', "/QuestionPack/Edit");
+        }
+    </script>

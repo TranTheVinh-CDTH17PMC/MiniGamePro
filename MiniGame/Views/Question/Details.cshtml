@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/LayoutViewAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <div style="display:flex;padding:10px 0px">
+        <a href="/Question/Create" class="btn btn-primary" class="btn btn-primary">Tạo Mới</a>
+    </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Danh sách gói câu hỏi</h6>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Delete", "Question", FormMethod.Post))
+            {
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Mô tả</th>
+                                <th>Đáp án 1</th>
+                                <th>Đáp án 2</th>
+                                <th>Đáp án 3</th>
+                                <th>Đáp án 4</th>
+                                <th>Đáp án đúng</th>
+                                <th>Hình ảnh</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Mô tả</th>
+                                <th>Đáp án 1</th>
+                                <th>Đáp án 2</th>
+                                <th>Đáp án 3</th>
+                                <th>Đáp án 4</th>
+                                <th>Đáp án đúng</th>
+                                <th>Hình ảnh</th>
+                                <th>Trạng Thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Mota</td>
+                                    <td>@item.CauA</td>
+                                    <td>@item.CauB</td>
+                                    <td>@item.CauC</td>
+                                    <td>@item.CauD</td>
+                                    <td>@item.DAn</td>
+                                    <td><img src="~/Content/ImgCauHoi/@item.Hinhmota" style="width:100%; height:auto" /></td>
+                                    <td>@item.Trangthai</td>
+                                    <td>
+                                        <a href="@Url.Action("Edit", "Question", new { @Id = item.Id })" class="btn btn-success">
+                                            Sửa
+                                        </a>
+                                        <button type="submit" class="btn btn-danger" id="IdDelete" name="IdDelete" value="@item.Id" onclick="return ConfirmDelete();">Xóa</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+<script>
+
+</script>
+

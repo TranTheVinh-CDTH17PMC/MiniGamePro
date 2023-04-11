@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Start";
+    Layout = "~/Views/Shared/LayoutViewGame.cshtml";
+}
+
+<div class="welcome-message">
+    <h1>Howdy! Welcome.</h1>
+    <p>Nhập ID gói câu hỏi.</p>
+    <input name="id" id="id" required>
+</div>
+<div class="controls" style="padding-top:15px">
+    <a id="startbtn" class="btn" style="color:white">Bắt Đầu</a>
+    @if (!@User.Identity.IsAuthenticated)
+    {
+        <p>Đăng nhập để tạo câu hỏi</p>
+        <a id="login-btn" class="start-btn btn" href="/Account/Login">Đăng Nhập</a>
+    }
+    @if (@User.Identity.IsAuthenticated)
+    {
+        <a style="margin-top:10px" id="login-btn" class="start-btn btn" href="/Game/Index">Trang chủ</a>
+    }
+
+</div>
+<script>
+    $("#startbtn").on('click', function () {
+        var value = $("#id").val();
+        $.ajax({
+            url: '/Game/CountQues/',
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            data: { id: value },
+            success: function (data) {
+                if (data > 0) {
+                    window.location.href = "@Url.Action("Play", "Game", new { id = "ID" })".replace("ID", value);
+                }
+                else {
+                    alert("Mã câu hỏi không tồn tại");
+                    return false;
+                }
+            }
+        });
+        
+    })
+
+</script>
